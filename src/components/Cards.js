@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Result from "./Result";
 
 function Card({items}){
 
@@ -125,9 +126,11 @@ function Card({items}){
                     </div>
                     
                 ))}
-
+                
             </div>
-            
+           <div className="flex justify-center mt-10">
+                <Result cardItems={cardItems}/>
+           </div>
         </div>
     );
 }
