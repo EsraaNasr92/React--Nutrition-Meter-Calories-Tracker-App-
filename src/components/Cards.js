@@ -4,6 +4,7 @@ function Card({items}){
 
     const [cardItems, setCardItems] = useState(items);
     const [editingIndex, setEditingIndex] = useState(null);
+    const [itemNumber, setItemNumber] = useState(Array(items.lenght).fill(1));
 
     const handleEdit = (index) => {
         setEditingIndex(index);
@@ -19,9 +20,16 @@ function Card({items}){
         setCardItems(updatedItems);
     }
 
+    const handleCountChange = (index, value) => {
+        const updatedCounts = [...itemNumber];
+        updatedCounts[index] += value;
+        setItemNumber(updatedCounts);
+    }
+
     // To update UI after deleting item
     useEffect(() => {
         setCardItems(items);
+        setItemNumber(Array(items.length).fill(1));
     }, [items]);
 
     const handleDeleteItem = (index) => {
@@ -32,6 +40,9 @@ function Card({items}){
         
         // Update the state with the modified items array
         setCardItems(updatedItems);
+
+        const updatedCounts = [...itemNumber.slice(0, index), ...itemNumber.slice(index + 1)];
+        setItemNumber(updatedCounts);
     }
 
     return(
@@ -47,22 +58,22 @@ function Card({items}){
                                     onChange={(e) => handleChange(e, 'itemName', index)}
                                 />
                                 <input
-                                    type="text"
+                                    type="number"
                                     value={item.protien}
                                     onChange={(e) => handleChange(e, 'protien', index)}
                                 />
                                 <input
-                                    type="text"
+                                    type="number"
                                     value={item.calories}
                                     onChange={(e) => handleChange(e, 'calories', index)}
                                 />
                                 <input
-                                    type="text"
+                                    type="number"
                                     value={item.carbs}
                                     onChange={(e) => handleChange(e, 'carbs', index)}
                                 />
                                 <input
-                                    type="text"
+                                    type="number"
                                     value={item.fat}
                                     onChange={(e) => handleChange(e, 'fat', index)}
                                 />
@@ -80,6 +91,21 @@ function Card({items}){
                                 <p>Calories: {item.calories}</p>
                                 <p>Carbs: {item.carbs}</p>
                                 <p>Fat: {item.fat}</p>
+                                <div className="counter mb-5">
+                                    <button
+                                        className='bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-4 rounded'
+                                        onClick={() => handleCountChange(index, 1)}
+                                    >
+                                        +
+                                    </button>
+                                    {itemNumber[index]}
+                                    <button
+                                        className='ml-4 bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-4 rounded'
+                                        onClick={() => handleCountChange(index, -1)}
+                                    >
+                                        -
+                                    </button>
+                                </div>
                                 <div className="buttons">
                                     <button 
                                         className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-4 rounded'
@@ -96,14 +122,12 @@ function Card({items}){
                                 </div>
                         </div>
                         )}
-    
-
-        
                     </div>
                     
                 ))}
 
             </div>
+            
         </div>
     );
 }
