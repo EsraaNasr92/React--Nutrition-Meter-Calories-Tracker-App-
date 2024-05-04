@@ -5,8 +5,9 @@ function Card({items}){
 
     const [cardItems, setCardItems] = useState(items);
     const [editingIndex, setEditingIndex] = useState(null);
-    const [itemNumber, setItemNumber] = useState(Array(items.lenght).fill(1));
+    const [itemNumber, setItemNumber] = useState(Array(items.length).fill(1));
 
+    // To edit values
     const handleEdit = (index) => {
         setEditingIndex(index);
     }
@@ -23,8 +24,25 @@ function Card({items}){
 
     const handleCountChange = (index, value) => {
         const updatedCounts = [...itemNumber];
-        updatedCounts[index] += value;
-        setItemNumber(updatedCounts);
+        // Ensure count doesn't go below 1
+        if (updatedCounts[index] + value >= 1) {
+            updatedCounts[index] += value;
+            setItemNumber(updatedCounts);
+    
+            // Recalculate totals based on updated quantities
+            const updatedItems = cardItems.map((item, i) => {
+                if (i === index) {
+                    return {
+                        ...item,
+                        quantity: updatedCounts[index]
+                    };
+                }
+                return item;
+            });
+    
+            // Update cardItems with the updatedItems array
+            setCardItems(updatedItems);
+        }
     }
 
     // To update UI after deleting item
@@ -88,10 +106,10 @@ function Card({items}){
                         ): (
                             <div>
                                 <p>Name: {item.itemName}</p>
-                                <p>Protien: {item.protien}</p>
-                                <p>Calories: {item.calories}</p>
-                                <p>Carbs: {item.carbs}</p>
-                                <p>Fat: {item.fat}</p>
+                                <p>Protien: {item.protien * itemNumber[index]}</p>
+                                <p>Calories: {item.calories * itemNumber[index]}</p>
+                                <p>Carbs: {item.carbs * itemNumber[index]}</p>
+                                <p>Fat: {item.fat * itemNumber[index]}</p>
                                 <div className="counter mb-5">
                                     <button
                                         className='bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-4 rounded'
@@ -129,7 +147,7 @@ function Card({items}){
                 
             </div>
            <div className="flex justify-center mt-10">
-                <Result cardItems={cardItems}/>
+                {cardItems.length > 0 && <Result cardItems={cardItems} itemNumber={itemNumber} />}
            </div>
         </div>
     );
