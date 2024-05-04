@@ -48,7 +48,7 @@ function Card({items}){
     // To update UI after deleting item
     useEffect(() => {
         setCardItems(items);
-        setItemNumber(Array(items.length).fill(1));
+        setItemNumber(prevItemNumber => [...prevItemNumber, 1]);
     }, [items]);
 
     const handleDeleteItem = (index) => {
@@ -117,7 +117,7 @@ function Card({items}){
                                     >
                                         +
                                     </button>
-                                    {itemNumber[index]}
+                                        {itemNumber[index]}
                                     <button
                                         className='ml-4 bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-4 rounded'
                                         onClick={() => handleCountChange(index, -1)}
