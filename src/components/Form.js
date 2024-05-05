@@ -1,9 +1,7 @@
 import { useState } from "react";
-import Cards from "./Cards";
 
 function Form({ onAddItem }){
 
-    const [items, setItems] = useState([]);
     const [itemName, setItemName] = useState('');
     const [protien, setProtien] = useState('');
     const [calories, setCalories] = useState('');
