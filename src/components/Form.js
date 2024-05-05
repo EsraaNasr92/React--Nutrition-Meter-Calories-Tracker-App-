@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Cards from "./Cards";
 
-function Form(){
+function Form({ onAddItem }){
 
     const [items, setItems] = useState([]);
     const [itemName, setItemName] = useState('');
@@ -19,30 +19,26 @@ function Form(){
         setCarbs('');
     }
 
-    //Function to add item
     const handleAddItem = () => {
-
-        if(!itemName || !protien || !calories || !fat || !carbs){
-            alert("Please fill in all fields before adding an items");
-            return;
-        }
-
+        // Validate input fields...
         const newItem = {
             itemName: itemName,
             protien: protien,
             calories: calories,
+            carbs: carbs,
             fat: fat,
-            carbs: carbs
         };
-        setItems([...items, newItem]);
+        onAddItem(newItem); // Call the function passed from the parent component
 
+        // Clear input fields...
         setItemName('');
         setProtien('');
         setCalories('');
         setCarbs('');
         setFat('');
-
-    }
+        
+        console.log(newItem);
+    };
 
     return(
         <div>
@@ -120,7 +116,7 @@ function Form(){
                 </button>
             </div>
 
-            <Cards items={items}/>
+            
         </div>
     );
 }
