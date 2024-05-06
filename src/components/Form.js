@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function Form({ onAddItem }){
+function Form({ onAddItem, onDeleteAllItem, index }){
 
     const [itemName, setItemName] = useState('');
     const [protien, setProtien] = useState('');
@@ -18,7 +18,12 @@ function Form({ onAddItem }){
     }
 
     const handleAddItem = () => {
-        // Validate input fields...
+        // Inputs validation
+        if(!itemName || !protien || !calories || !carbs || !fat ){
+            alert("Please fill in the inputs");
+            return 0;
+        }
+        // insert input fields...
         const newItem = {
             itemName: itemName,
             protien: protien,
@@ -36,6 +41,10 @@ function Form({ onAddItem }){
         setFat('');
         
         console.log(newItem);
+    };
+
+    const handleDeleteAll = (index) => {
+        onDeleteAllItem(index);
     };
 
     return(
@@ -107,14 +116,19 @@ function Form({ onAddItem }){
                     Add item
                 </button>
                 <button 
-                    className='bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
+                    className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4  mr-4 rounded'
                     onClick={handleReset}
                 >
-                    Clear all
+                    Reset inputs
+                </button>
+                <button
+                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                    onClick={() => handleDeleteAll(index)}
+                >
+                    Delete all items
                 </button>
             </div>
 
-            
         </div>
     );
 }

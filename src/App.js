@@ -4,6 +4,7 @@ import Card from './components/Cards';
 import './App.css';
 
 function App() {
+
   const [items, setItems] = useState([]);
   const [itemNumber, setItemNumber] = useState([]);
 
@@ -22,11 +23,23 @@ function App() {
     setItemNumber(updatedItemNumber);
   };
 
+  const handleDeleteAllItem = () =>{
+    setItems([]);
+  }
+
   return (
     <div className="">
       <h1 className='text-3xl text-center font-bold underline mb-5'>Track your calories</h1>
-      <Form onAddItem={handleAddItem} />
-      <Card items={items} itemNumber={itemNumber} onDeleteItem={handleDeleteItem} setItemNumber={setItemNumber} />
+      <Form 
+        onAddItem={handleAddItem} 
+        onDeleteAllItem={handleDeleteAllItem}
+      />
+      <Card 
+        items={items} 
+        itemNumber={itemNumber} 
+        onDeleteItem={handleDeleteItem} 
+        setItemNumber={setItemNumber} 
+      />
     </div>
   );
 }

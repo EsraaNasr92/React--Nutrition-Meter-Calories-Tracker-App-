@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Result from "./Result";
 
 const Card = ({ items, itemNumber, onDeleteItem, setItemNumber }) => {
+
   const [cardItems, setCardItems] = useState(items);
   const [editingIndex, setEditingIndex] = useState(null);
   const [editedItem, setEditedItem] = useState({});
@@ -134,7 +135,13 @@ const Card = ({ items, itemNumber, onDeleteItem, setItemNumber }) => {
         ))}
       </div>
       <div className="flex justify-center mt-10">
-        {cardItems.length > 0 && <Result cardItems={cardItems} itemNumber={itemNumber} />}
+        {cardItems.length > 0 && 
+          <Result 
+            cardItems={cardItems} 
+            itemNumber={itemNumber} 
+          />
+        }
+
       </div>
     </div>
   );
