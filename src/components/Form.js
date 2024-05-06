@@ -49,8 +49,8 @@ function Form({ onAddItem, onDeleteAllItem, index }){
 
     return(
         <div>
-            <div className="flex justify-center">
-                <div className="w-auto mr-4">
+            <div className="flex flex-wrap justify-center">
+                <div className="w-full sm:w-1/2 md:w-auto lg:w-1/5 mb-4 px-2">
                     <label htmlFor="input-item-label">Name of food</label>
                     <input 
                         type="text" 
@@ -59,20 +59,22 @@ function Form({ onAddItem, onDeleteAllItem, index }){
                         placeholder="Add your item" 
                         value={itemName}
                         onChange={(e) => setItemName(e.target.value)} 
-                        required />
+                        required 
+                    />
                 </div>
-                <div className="w-auto mr-4">
+                <div className="w-full sm:w-1/2 md:w-auto lg:w-1/5 mb-4 px-2">
                     <label htmlFor="input-protein-label">Protein</label>
                     <input 
                         type="number" 
                         id="input-protein-label" 
                         className="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 "
-                        placeholder="protein (g)" 
+                        placeholder="Protein (g)" 
                         value={protien}
                         onChange={(e) => setProtien(e.target.value)} 
-                        required/>
+                        required
+                    />
                 </div>
-                <div className="w-auto mr-4">
+                <div className="w-full sm:w-1/2 md:w-auto lg:w-1/5 mb-4 px-2">
                     <label htmlFor="input-Calories-label">Calories</label>
                     <input 
                         type="number" 
@@ -81,9 +83,10 @@ function Form({ onAddItem, onDeleteAllItem, index }){
                         placeholder="Calories" 
                         value={calories}
                         onChange={(e) => setCalories(e.target.value)}
-                        required />
+                        required 
+                    />
                 </div>
-                <div className="w-auto mr-4">
+                <div className="w-full sm:w-1/2 md:w-auto lg:w-1/5 mb-4 px-2">
                     <label htmlFor="input-fat-label">Fat</label>
                     <input 
                         type="number" 
@@ -92,9 +95,10 @@ function Form({ onAddItem, onDeleteAllItem, index }){
                         placeholder="Fat (g)" 
                         value={fat}
                         onChange={(e) => setFat(e.target.value)}
-                        required />
+                        required 
+                    />
                 </div>
-                <div className="w-auto mr-4">
+                <div className="w-full sm:w-1/2 md:w-auto lg:w-1/5 mb-4 px-2">
                     <label htmlFor="input-carbs-label">Carbs</label>
                     <input 
                         type="number" 
@@ -103,10 +107,10 @@ function Form({ onAddItem, onDeleteAllItem, index }){
                         placeholder="Carbs (g)" 
                         value={carbs}
                         onChange={(e) => setCarbs(e.target.value)}
-                        required />
+                        required 
+                    />
                 </div>
             </div>
-
 
             <div className="text-center mt-5">
                 <button 
@@ -125,11 +129,11 @@ function Form({ onAddItem, onDeleteAllItem, index }){
                     className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                     onClick={() => handleDeleteAll(index)}
                 >
-                    Delete all items
+                Delete all items
                 </button>
             </div>
-
         </div>
+
     );
 }
 

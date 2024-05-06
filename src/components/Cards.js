@@ -57,7 +57,7 @@ const Card = ({ items, itemNumber, onDeleteItem, setItemNumber }) => {
     <div className="card-container">
       <div className="items flex flex-wrap justify-center">
         {items.map((item, index) => (
-          <div key={index} className="item w-1/4">
+          <div key={index} className="item w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 p-4">
             {editingIndex === index ? (
               <div key={index}>
                 <input
